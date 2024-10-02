@@ -1,4 +1,4 @@
-function initRecentlyViewed() {
+(function () {
     function loadCSS(href) {
         var link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -14,17 +14,19 @@ function initRecentlyViewed() {
         document.head.appendChild(script);
     }
 
-    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
+    function init(){
+        loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
     loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
     loadJS('https://code.jquery.com/jquery-3.6.0.min.js', function() {
         loadJS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', initSlick);
     });
+    }
 
     function addRecentlyViewed(product) {
-        var viewedProducts = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+        var viewedProducts = JSON.parse(localStorage.getItem('reo_recentlyViewed')) || [];
         if (!viewedProducts.some(function(item) { return item.id === product.id; })) {
             viewedProducts.push(product);
-            localStorage.setItem('recentlyViewed', JSON.stringify(viewedProducts));
+            localStorage.setItem('reo_recentlyViewed', JSON.stringify(viewedProducts));
         }
     }
     
@@ -49,7 +51,7 @@ function initRecentlyViewed() {
     }
 
     function createRecentlyViewedSection() {
-        var viewedProducts = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+        var viewedProducts = JSON.parse(localStorage.getItem('reo_recentlyViewed')) || [];
         if (viewedProducts.length === 0) return;
 
         var section = document.createElement('div');
@@ -84,20 +86,21 @@ function initRecentlyViewed() {
                 infinite: true,
                 speed: 300,
                 slidesToShow: 5,
-                slidesToScroll: 4,
+                slidesToScroll: 1,
                 centerMode : false,
+                mobileFirst: true,
                 responsive: [
                     {
                         breakpoint: 1440,
-                        settings: { slidesToShow: 5, slidesToScroll: 3 }
+                        settings: { slidesToShow: 5, slidesToScroll: 1 }
                     },
                     {
                         breakpoint: 961,
-                        settings: { slidesToShow: 4, slidesToScroll: 2 }
+                        settings: { slidesToShow: 4, slidesToScroll: 1 }
                     },
                     {
                         breakpoint: 769,
-                        settings: { slidesToShow: 3, slidesToScroll: 2 }
+                        settings: { slidesToShow: 3, slidesToScroll: 1 }
                     },
                     {
                         breakpoint: 768,
@@ -107,7 +110,7 @@ function initRecentlyViewed() {
             });
         });
     }
+    init();
 
-}
+})();
 
-initRecentlyViewed();
