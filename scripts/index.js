@@ -17,7 +17,7 @@ function initRecentlyViewed() {
     loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
     loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
     loadJS('https://code.jquery.com/jquery-3.6.0.min.js', function() {
-        loadJS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', initSlickAndInitView);
+        loadJS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', initSlick);
     });
 
     function addRecentlyViewed(product) {
@@ -29,7 +29,7 @@ function initRecentlyViewed() {
     }
     
     
-    function initSlickAndInitView() {
+    function initSlick() {
         if (window.location.href.includes('/dp/')) {
             var price = document.querySelectorAll('.a-price-whole');
             var actualPrice = price.length > 0 ? price[0].innerHTML : 'N/A';
@@ -85,6 +85,7 @@ function initRecentlyViewed() {
                 speed: 300,
                 slidesToShow: 5,
                 slidesToScroll: 4,
+                centerMode : false,
                 responsive: [
                     {
                         breakpoint: 1440,

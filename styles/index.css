@@ -7,6 +7,7 @@
 .product-container {
     display: block;
     list-style-type: none;
+    justify-content: flex-start;
 }
 
 .product-card {
@@ -36,4 +37,10 @@
     width: 240px;
     height: 200px;
 }
+
+.product-card a {
+    text-decoration: none; 
+}
+
+
 
